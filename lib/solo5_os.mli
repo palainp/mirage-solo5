@@ -35,18 +35,7 @@ module Memory : sig
   (** [stat ()] returns memory allocation statistics. This uses mallinfo and
       walks over the entire heap. This call is slower than {!quick_stat}. *)
 
-  val quick_stat : unit -> stat
-
-  (** [quick_stat ()] returns memory allocation statistics. This call uses a
-      precomputed value. This call is cheaper than {!stat}, but the returned
-      values may not be completely accurate. *)
-
-  val trim : unit -> unit
-  (** [trim ()] release free memory from the heap (may update the value returned
-      by {!quick_stat}) *)
-
   val metrics :
-    ?quick:bool ->
     tags:'a Metrics.Tags.t ->
     unit ->
     ('a, unit -> Metrics.Data.t) Metrics.src
